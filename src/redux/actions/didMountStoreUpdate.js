@@ -1,5 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
 
-const onStoreUpdate = createAction('update/store');
+const updateStoreRequest = createAction('update/storeRequest');
+const updateStoreSuccess = createAction('update/storeSuccess');
+const updateStoreError = createAction('update/storeError');
 
-export default onStoreUpdate;
+export default {updateStoreRequest, updateStoreSuccess, updateStoreError};

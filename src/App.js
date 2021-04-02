@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import onStoreUpdate from './redux/actions/didMountStoreUpdate';
-import onAddContact from './redux/actions/addContact';
-import onDeleteContact from './redux/actions/deleteContact';
+import onStoreUpdate from './redux/operations/storeUpdateOperation';
+import onAddContact from './redux/operations/addContactOperation';
+import onDeleteContact from './redux/operations/deleteContactOperation';
 import onSearchContacts from './redux/actions/searchContacts';
 
 import ContactForm from './components/ContactForm/ContactForm';
@@ -15,31 +15,14 @@ import './App.css';
 class PhoneBook extends Component {
 
   componentDidMount() {
-    const {contacts, onStoreUpdate} = this.props;
+    const {onStoreUpdate} = this.props;
     // console.log("On Mount Component", this.props.contacts);
-    const localStorageContacts = localStorage.getItem('Contacts');
 
-    if (contacts.length === 0 && localStorageContacts !== null) {
-      const contacts = JSON.parse(localStorageContacts);
-      onStoreUpdate(contacts);
-
-    } else if (localStorageContacts === null) {
-      const contacts = JSON.stringify(this.props.contacts);
-      localStorage.setItem('Contacts', contacts);
-    };
+      onStoreUpdate();
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const {contacts} = this.props;
-    const localStorageContacts = localStorage.getItem('Contacts');
-
-    if (contacts !== localStorageContacts) {
-      const contacts = JSON.stringify(this.props.contacts);
-      localStorage.setItem('Contacts', contacts);
-
-    } else if (contacts.length === 0) {
-      localStorage.removeItem('Contacts');
-    };
+    
   };
 
   onStateUpdate = (obj) => {

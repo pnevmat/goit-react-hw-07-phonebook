@@ -1,13 +1,13 @@
 import {createReducer} from '@reduxjs/toolkit';
 
-import onStoreUpdate from '../actions/didMountStoreUpdate';
-import onAddContact from '../actions/addContact';
-import onDeleteContact from '../actions/deleteContact';
+import storeUpdate from '../actions/didMountStoreUpdate';
+import addContact from '../actions/addContact';
+import deleteContact from '../actions/deleteContact';
 
 const contactsReducer = createReducer([], {
-    [onStoreUpdate]: (_, {payload}) => [...payload],
-    [onAddContact]: (state, {payload}) => [...state, payload],
-    [onDeleteContact]: (state, {payload}) => state.filter(contact => contact.id !== payload)
+    [storeUpdate.updateStoreSuccess]: (_, {payload}) => [...payload],
+    [addContact.addContactSuccess]: (state, {payload}) => [...state, payload],
+    [deleteContact.deleteContactSuccess]: (state, {payload}) => state.filter(contact => contact.id !== payload)
 });
 
 export default contactsReducer;

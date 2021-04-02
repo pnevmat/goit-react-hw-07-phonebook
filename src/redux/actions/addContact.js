@@ -1,12 +1,15 @@
 import {createAction} from '@reduxjs/toolkit';
-import shortid from 'shortid';
 
-const onAddContact = createAction('add/contact', ({name, number}) => ({
-    payload: {
-        id: shortid.generate(),
-        name: name,
-        number: number
-    }
-}));
+// const onAddContact = createAction('add/contact', ({name, number}) => ({
+//     payload: {
+//         id: shortid.generate(),
+//         name: name,
+//         number: number
+//     }
+// }));
 
-export default onAddContact;
+const addContactRequest = createAction('add/contactRequest');
+const addContactSuccess = createAction('add/contactSuccess');
+const addContactError = createAction('add/contactError');
+
+export default {addContactRequest, addContactSuccess, addContactError};
