@@ -1,7 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
 
-const onSearchContacts = createAction('search/contacts', ({target}) => ({
-    payload: target.value.toLowerCase()
-}));
+const onSearchContacts = createAction('search/contacts')
 
 export default onSearchContacts;

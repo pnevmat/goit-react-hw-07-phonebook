@@ -6,6 +6,8 @@ import onAddContact from './redux/operations/addContactOperation';
 import onDeleteContact from './redux/operations/deleteContactOperation';
 import onSearchContacts from './redux/actions/searchContacts';
 
+import selectors from './redux/selectors/selectors';
+
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
@@ -16,7 +18,7 @@ class PhoneBook extends Component {
 
   componentDidMount() {
     const {onStoreUpdate} = this.props;
-    // console.log("On Mount Component", this.props.contacts);
+    console.log("On Mount Component", this.props);
 
       onStoreUpdate();
   };
@@ -38,20 +40,21 @@ class PhoneBook extends Component {
     };
   };
 
-  contactsFinderHandler = () => {
-    const {contacts} = this.props;
+  // contactsFinderHandler = () => {
+  //   const {contacts} = this.props;
 
-    if (this.props.filter !== '') {
-      const foundContacts = contacts.filter(contact => 
-        contact.name.toLowerCase().includes(this.props.filter));
-      return foundContacts
-    };
-  };
+  //   if (this.props.filter !== '') {
+  //     const foundContacts = contacts.filter(contact => 
+  //       contact.name.toLowerCase().includes(this.props.filter));
+  //     return foundContacts
+  //   };
+  // };
 
   render() {
     const {onSearchContacts, contacts, filter, onDeleteContact} = this.props;
-    const foundContacts = this.contactsFinderHandler();
+    // console.log("Contacts", contacts);
     // console.log(this.props);
+    const foundContacts = selectors.contactsFinderHandler(contacts, filter);
     return (
       <section className="section">
         <h1>Phone Book</h1>
@@ -71,9 +74,9 @@ class PhoneBook extends Component {
   }
 };
 
-const mapStateToProps = ({contacts, filter}) => ({
-  contacts,
-  filter
+const mapStateToProps = state => ({
+  contacts: selectors.getAllContacts(state),
+  filter: selectors.getFilter(state)
 });
 
 const mapDispatchToProps = dispatch => ({

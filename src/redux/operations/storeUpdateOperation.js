@@ -8,8 +8,12 @@ const onStoreUpdate = text => dispatch => {
     dispatch(actions.updateStoreRequest());
 
     axios.get('/contacts')
-    .then(({data}) => dispatch(actions.updateStoreSuccess(data)))
-    .catch(error => dispatch(actions.updateStoreError(error)))
+    .then(({data}) => {
+        console.log(data);
+        return dispatch(actions.updateStoreSuccess(data))})
+    .catch(error => {
+        console.log(error);
+        return dispatch(actions.updateStoreError(error))})
 }
 
 export default onStoreUpdate;
