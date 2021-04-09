@@ -5,9 +5,6 @@ import filterReducer from './reducers/filterReducer';
 
 import logger from 'redux-logger';
 
-console.log(contactsReducer);
-console.log(filterReducer);
-
 const store = configureStore({
     reducer: {
         contacts: contactsReducer,

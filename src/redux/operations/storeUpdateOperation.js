@@ -9,10 +9,8 @@ const onStoreUpdate = text => dispatch => {
 
     axios.get('/contacts')
     .then(({data}) => {
-        console.log(data);
         return dispatch(actions.updateStoreSuccess(data))})
     .catch(error => {
-        console.log(error);
         return dispatch(actions.updateStoreError(error))})
 }
 
